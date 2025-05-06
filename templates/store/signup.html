@@ -1,0 +1,95 @@
+{% extends 'store/base.html' %}
+{% block content %}
+<h2>Sign Up</h2>
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    body {
+        background: linear-gradient(to right, #e0f7fa, #ffffff);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .signup-container {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        width: 380px;
+        text-align: center;
+    }
+
+    .signup-container h2 {
+        margin-bottom: 20px;
+        font-size: 2.2rem;
+        color: #2c3e50;
+    }
+
+    .signup-container form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .signup-container input {
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+    }
+
+    .signup-container button {
+        padding: 12px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .signup-container button:hover {
+        background-color: #218838;
+    }
+
+    nav {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+    }
+
+    nav span {
+        font-weight: bold;
+        margin-right: 15px;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+
+    nav a:hover {
+        color: #0056b3;
+    }
+</style>
+<nav>
+    {% if user.is_authenticated %}
+        <span>Welcome, {{ user.username }}</span>
+        <a href="{% url 'view_cart' %}">🛒 Cart</a>
+    {% else %}
+        
+    {% endif %}
+</nav>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign Up</button>
+</form>
+{% endblock %}

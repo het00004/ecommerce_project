@@ -1,0 +1,968 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <link rel="stylesheet" href="{% static 'store/css/styles.css' %}">
+</head>
+<body>
+<!--
+<style>
+ .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product-card h2 {
+    margin: 10px 0 5px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.product-card p {
+    color: #555;
+    font-size: 0.95rem;
+    margin: 5px 0;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    gap: 10px;
+}
+
+.button-group .btn {
+    flex: 1;
+}
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #bababb, #adb4b9);
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Header Navigation Bar */
+    .navbar {
+        background-color: #373535;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+    }
+
+    .navbar h1 {
+        margin: 0;
+        font-size: 1.8rem;
+    }
+
+    .nav-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .nav-actions form,
+    .nav-actions a,
+    .nav-actions button {
+        margin: 0;
+    }
+
+    .btn-logout,
+    .cart-button,
+    .login-btn,
+    .signup-btn {
+        background-color: #e74c3c;
+        color: white;
+        padding: 8px 14px;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .cart-button {
+        background-color: #6c757d;
+    }
+
+    .login-btn {
+        background-color: #6c757d;
+    }
+
+    .signup-btn {
+        background-color: #5a6268;
+    }
+
+    .btn-logout:hover {
+        background-color: #c0392b;
+       
+    }
+
+    .cart-button:hover {
+        background-color: #138496;
+    }
+    .view-wishlist:hover {
+        background-color: #138496;
+    }
+    .login-btn:hover {
+        background-color: #5a6268;
+    }
+
+    .signup-btn:hover {
+        background-color: #495057;
+    }
+    /* Buttons */
+.btn {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: rgb(1, 0, 0);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+/* Add to Cart */
+.add-to-cart {
+    background-color: #f3f6f7;
+}
+
+.add-to-cart:hover {
+    background-color: #64a9f3;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 91, 187, 0.3);
+}
+
+/* Buy Now */
+
+
+
+.buy-now:hover {
+    background-color: #1e7e34;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.buy-now {
+    background-color: #f7f7f7;
+
+    text-decoration: none;
+    display: block;
+}
+ /* Dropdown Container */
+ .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Button */
+    .dropbtn {
+        background-color: #007bff;
+        color: #f7f7f7;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    /* Dropdown Content (hidden by default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: rgb(255, 255, 255);
+        min-width: 100px;
+        box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+        z-index: 1;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    /* Dropdown links */
+    .dropdown-content a {
+        color: black;
+        padding: 10px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    /* Hover Effects */
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    /* Product styles (rest of your styles remain unchanged)... */
+    .footer-content {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 40px 0;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            color: #3498db;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #3498db;
+        }
+
+        .footer-section p {
+            margin: 10px 0;
+            line-height: 1.6;
+            color: #bdc3c7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            padding: 8px 15px;
+            border: 1px solid #3498db;
+            border-radius: 4px;
+        }
+
+        .social-links a:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .footer-bottom {
+            background-color: #1a252f;
+            text-align: center;
+            padding: 20px 0;
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+        .thumbnail-gallery {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.thumbnail-gallery img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.thumbnail-gallery img:hover {
+    transform: scale(1.1);
+}
+
+  .star.hover,
+  .star.selected {
+    color: orange;
+  }
+  .star {
+    font-size: 20px;
+    color: gray;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.view-wishlist-btn {
+    background-color: #f39c12;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.view-wishlist-btn:hover {
+    background-color: #e67e22;
+}
+
+#fullscreen-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#fullscreen-modal img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    font-size: 3rem;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+    z-index: 10000;
+}
+
+.nav-btn.left {
+    left: 20px;
+}
+
+.nav-btn.right {
+    right: 20px;
+}
+.popup-link {
+    display: block;
+    margin: 8px 0;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.popup-link:hover {
+    color: #007BFF;
+}
+
+.logout-btn {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    padding: 6px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+    background-color: #d32f2f;
+}
+.poster-slider {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.poster-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    background-size: cover;
+    background-position: center;
+}
+
+.poster-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.buy-now-btn {
+    display: inline-block;
+    background: #ff4500;
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.buy-now-btn:hover {
+    background: #e63e00;
+}
+-->
+<style>
+/* Reset basic body and background */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Navigation bar */
+.navbar {
+        background-color: #333;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+    }
+
+    .navbar h1 {
+        margin: 0;
+        font-size: 1.8rem;
+    }
+
+    .nav-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .nav-actions form,
+    .nav-actions a,
+    .nav-actions button {
+        margin: 0;
+    }
+
+    .navbar {
+        background-color: #333;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+    }
+
+    .navbar h1 {
+        margin: 0;
+        font-size: 1.8rem;
+    }
+
+    .nav-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .nav-actions form,
+    .nav-actions a,
+    .nav-actions button {
+        margin: 0;
+    }
+    #het {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 1px 20px;
+    
+}
+
+#het a {
+    color: rgb(27, 1, 1);
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+#het a:hover {
+   
+    border-color: #000000;
+   
+}
+
+
+.dropbtn {
+    font-size: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Dropdown styles */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    padding: 10px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown-content a {
+        color: black;
+        padding: 10px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    /* Hover Effects */
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+/* Product list layout */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 40px;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    padding: 20px;
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+/* Buttons */
+.button-group .btn {
+    background-color: #ff4d4f;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.button-group .btn:hover {
+    background-color: #e03e3f;
+}
+.thumbnail-gallery {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.thumbnail-gallery img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.thumbnail-gallery img:hover {
+    transform: scale(1.1);
+}
+
+  .star.hover,
+  .star.selected {
+    color: orange;
+  }
+  .star {
+    font-size: 20px;
+    color: gray;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.view-wishlist-btn {
+    background-color: #f39c12;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.view-wishlist-btn:hover {
+    background-color: #e67e22;
+}
+
+#fullscreen-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#fullscreen-modal img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+/* Footer styling */
+footer {
+    background: #f9f9f9;
+    padding: 40px;
+    font-size: 14px;
+    color: #555;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.footer-section h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+.popup-link {
+    display: block;
+    margin: 8px 0;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.popup-link:hover {
+    color: #007BFF;
+}
+
+.logout-btn {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    padding: 6px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+    background-color: #d32f2f;
+}
+.poster-slider {
+    position: relative;
+    overflow: hidden;
+    height: 600px;
+    width: 1520PX;
+    margin: 20px 0;
+    border-radius: 0px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.poster-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    background-size: cover;
+    background-position: center;
+}
+
+.poster-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.buy-now-btn {
+    display: inline-block;
+    background: #ff4500;
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.buy-now-btn:hover {
+    background: #e63e00;
+}
+
+
+
+</style>
+
+<!-- Navbar/Header -->
+<div class="navbar">
+    <div style="text-align: center; margin-top: 1;">
+        <img src="{% static 'logo3.jpeg' %}" alt="Site Logo" style="height: 50px;">
+    </div>
+   
+    <h1>H MART</h1>
+   
+        
+        <!-- Profile Dropdown -->
+<div class="profile-dropdown" style="position: relative;">
+    <button class="dropbtn" onclick="toggleProfilePopup()" style="background: none; border: none; padding: 0;">
+        {% if user_profile and user_profile.profile_picture %}
+            <img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture" style="width: 30px; height: 30px; border-radius: 50%;">
+        {% else %}
+            <img src="{% static 'h2.jpg' %}" alt="No Profile Picture" style="width: 30px; height: 30px; border-radius: 50%;">
+        {% endif %}
+    </button>
+   
+
+    <!-- Popup Content -->
+    <div id="profile-popup" class="popup-content" style="display: none; position: absolute; right: 0; background-color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 10px; width: 220px; z-index: 999; padding: 15px;">
+        <p><strong>{{ request.user.username }}</strong></p>
+        <p style="font-size: 14px; color: gray;">{{ request.user.email }}</p>
+        <hr>
+        <a href="{% url 'view_cart' %}" class="popup-link">🛒 View Cart</a><br>
+        <a href="{% url 'view_wishlist' %}" class="popup-link">❤️ View Wishlist</a><br>
+        <a href="{% url 'signup' %}" class="signup-btn">Sign Up</a><br>
+        <hr>
+        <a href="{% url 'logout' %}" class="logout-btn">🚪 Logout</a>
+    </div>
+</div>
+
+    </div>
+   
+</div>
+<div id="het">
+    {% for category in categories %}
+        <a href="?category={{ category.id }}">{{ category.name }}</a>
+    {% endfor %}
+</div> 
+
+
+
+
+<div class="poster-slider">
+    {% for slide in slides %}
+        <div class="poster-slide {% if forloop.first %}active{% endif %}" style="background-image: url('{{ slide.image.url }}');">
+            <h2>{{ slide.title }}</h2>
+            <p>{{ slide.subtitle }}</p>
+            {% if slide.link %}
+                <a href="{{ slide.link }}" class="buy-now-btn">Buy Now</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+
+{% if messages %}
+  <div id="popup-messages">
+    {% for message in messages %}
+      <div class="popup-message {{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<!-- Product List -->
+<div class="product-list">
+    {% for product in products %}
+    <div class="product-card">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% else %}
+            <img src="https://via.placeholder.com/250x180" alt="No image">
+        {% endif %}
+
+        <!-- Show additional images if available -->
+        <div class="thumbnail-gallery">
+            {% for img in product.product_images.all %}
+                <img src="{{ img.image.url }}" alt="Additional image">
+            {% endfor %}
+        </div>
+
+        <h2>{{ product.name }}</h2>
+        <p>₹{{ product.price }} Stock : {{ product.stock }}</p>
+        <p>{{ product.description|truncatewords:15 }}</p>
+        <a href="{% url 'add_to_wishlist' product.id %}">♡ Save to Wishlist</a>
+        <div class="thumbnail-gallery">
+            {% for img in product.images.all %}
+                <img src="{{ img.image.url }}"
+                     alt="{{ product.name }} extra image"
+                     class="thumbnail"
+                     onclick="openFull(this.src)">
+            {% endfor %}
+        </div>
+        
+        <!-- Fullscreen Modal -->
+        <div id="fullscreen-modal" onclick="closeFull()" style="display:none;">
+            <img id="full-image" alt="Full View">
+        </div>
+
+        <div class="button-group">
+            <form method="post" action="{% url 'add_to_cart' product.id %}" style="display: flex; gap: 70px; align-items: center;">
+                {% csrf_token %}
+                <a href="{% url 'add_to_cart' product.id %}" class="btn add-to-cart">Add to Cart</a> 
+                <a href="{% url 'buy_now' product.id %}" class="btn buy-now">Buy Now</a>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<script>
+    function toggleProfilePopup() {
+    const popup = document.getElementById("profile-popup");
+    popup.style.display = (popup.style.display === "block") ? "none" : "block";
+}
+
+// Close the popup if clicked outside
+document.addEventListener('click', function(event) {
+    const popup = document.getElementById('profile-popup');
+    const trigger = document.querySelector('.profile-dropdown .dropbtn');
+    if (!popup.contains(event.target) && !trigger.contains(event.target)) {
+        popup.style.display = 'none';
+    }
+});
+    function openFull(src) {
+        const modal = document.getElementById('fullscreen-modal');
+        const image = document.getElementById('full-image');
+        modal.style.display = 'flex';
+        image.src = src;
+    }
+    
+    function closeFull() {
+        document.getElementById('fullscreen-modal').style.display = 'none';
+    }
+    let currentSlide = 0;
+  const slides = document.querySelectorAll('.poster-slide');
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (i === index) slide.classList.add('active');
+    });
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }
+
+  setInterval(nextSlide, 5000);
+    </script>
+    
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>About Us</h3>
+            <p>Your one-stop shop for all your needs. Quality products at affordable prices.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>Email: info@store.com</p>
+            <p>Phone: +1 234 567 890</p>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 Your Store. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>

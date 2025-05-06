@@ -1,0 +1,125 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+        body {
+            margin: 0;
+             padding: 0;
+            height: 100vh;
+            width: 100vw;
+            background: url("{% static '10634996.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.937);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .login-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-container input {
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .login-container button {
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+           
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            z-index: 10;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .navbar img {
+            height: 50px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+</style>
+</head>
+<div class="navbar">
+    <div style="text-align: center; margin-top: 1;">
+        
+      <a href="{% url 'product_list' %}"><img src="{% static 'logo3.jpeg' %}" alt="Site Logo" style="height: 70px; border-radius: 50%">
+      </a>
+      
+    </div>
+  
+    
+  </div>
+
+
+
+<div class="login-container">
+    <h2>Login</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+        <a href="{% url 'signup' %}" class="signup-btn">Sign Up</a>
+    </form>
+</div>
+{% endblock %}
+

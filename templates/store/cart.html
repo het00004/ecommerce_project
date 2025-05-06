@@ -1,0 +1,437 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}Your Cart{% endblock %}
+{% block content %}
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<style>
+
+.navbar {
+        background-color: #333;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+    }
+
+    .navbar h1 {
+        margin: 0;
+        font-size: 1.8rem;
+    }
+
+    .nav-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .nav-actions form,
+    .nav-actions a,
+    .nav-actions button {
+        margin: 0;
+    }
+
+    .btn-logout,
+    .cart-button,
+    .login-btn,
+    .signup-btn {
+        background-color: #e74c3c;
+        color: white;
+        padding: 8px 14px;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .cart-button {
+        background-color: #17a2b8;
+    }
+
+    .login-btn {
+        background-color: #6c757d;
+    }
+
+    .signup-btn {
+        background-color: #5a6268;
+    }
+
+    .btn-logout:hover {
+        background-color: #c0392b;
+       
+    }
+
+    .cart-button:hover {
+        background-color: #138496;
+    }
+
+    .login-btn:hover {
+        background-color: #5a6268;
+    }
+
+    .signup-btn:hover {
+        background-color: #495057;
+    }
+   h2 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2em;
+    color: #333;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+thead {
+    background-color: #f4f4f4;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+td {
+    color: #444;
+}
+
+h3 {
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+}
+
+.btn {
+    display: inline-block;
+    background: #28a745;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #218838;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    border: none;
+    background: none;
+}
+.payment-options {
+    margin: 20px 0;
+}
+
+.payment-options label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+.payment-detail {
+    margin: 10px 0;
+    display: none;
+}
+
+.payment-detail input,
+.payment-detail select {
+    padding: 10px;
+    width: 100%;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+button.btn {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button.btn:hover {
+    background-color: #218838;
+}
+
+  /* Checkout Page Styling */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f6f8fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 2rem;
+    color: #2c3e50;
+}
+
+form {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.payment-options label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: bold;
+    color: #34495e;
+}
+
+.payment-detail {
+    margin-bottom: 20px;
+    padding-left: 20px;
+    display: none;
+}
+
+.payment-detail input,
+.payment-detail select {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #3498db;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+<!--upseell and   cross sell-->
+/* Container for all product cards */
+.product-cards-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+
+.card {
+  width: 250px;  /* Set fixed width for cards */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+}
+
+/* Card hover effect */
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Card image */
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+/* Card content */
+.card-content {
+  padding: 15px;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Button style */
+.card-btn {
+  display: inline-block;
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.card-btn:hover {
+  background-color: #2980b9;
+}
+
+.cart-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background-color:#ffffff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.cart-button:hover {
+    background-color: #ffffff;
+}
+
+.cart-icon {
+    width: 20px;
+    height: 20px;
+}
+</style>
+
+<div class="navbar">
+  <div style="text-align: center; margin-top: 1;">
+      
+    <a href="{% url 'product_list' %}"><img src="{% static 'logo3.jpeg' %}" alt="Site Logo" style="height: 70px; border-radius: 50%">
+    </a>
+    
+  </div>
+  <center><h1>Cart</h1> </center>
+  <a href="{% url 'product_list' %}" class="cart-button">
+    <img src="{% static 'home.png' %}" alt="Cart" class="cart-icon">
+</a>
+</div>
+
+</div>
+{% if cart_items %}
+<table>
+    <thead>
+        <tr>
+          <th>Image</th>
+            <th>Product</th>
+            <th>p.price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+         
+            <th> Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in cart_items %}
+        <tr>
+          <td>
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width: 80px; height: auto;">
+        </td>
+            <td>{{ item.product.name }}</td>
+            <td>{{item.product.price}}</td>
+            <td>  <input type="number" name="quantity_{{ item.product.id }}" value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}">
+            </td>
+            <td>₹ {{ item.price }}</td>
+          
+            <td><button><a href="{% url 'remove_from_cart' item.product.id %}">Remove</a></button></td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h3>Grand Total: ₹ {{ total }}</h3>
+<button><a href="/checkout/" class="btn">Proceed to Checkout</a></button>
+{% else %}
+<center><h1>Your cart is empty.</h1></center>
+{% endif %}
+<!--upseell and   cross sell-->
+
+
+
+<!--{% if upsell %}
+  <h4>You might also like (Upsell)</h4>
+  <div class="product-card">
+    <div class="card">
+      <img src="{{ upsell.image.url }}" alt="{{ upsell.name }}" class="card-image">
+      <div class="card-content">
+        <p class="card-title">{{ upsell.name }} - ₹{{ upsell.price }}</p>
+        <a href="{% url 'add_to_cart' upsell.id %}" class="card-btn">Add to Cart</a>
+      </div>
+    </div>
+  </div>
+{% endif %}-->
+
+
+{% if cross_sells %}
+  <h4>Recommended for you (Cross-sell)</h4>
+  <div class="product-cards-container">
+    {% for product in cross_sells %}
+      <div class="product-card">
+        <div class="card">
+          <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-image">
+          <div class="card-content">
+            <p class="card-title">{{ product.name }} - ₹{{ product.price }}</p>
+            <a href="{% url 'add_to_cart' product.id %}" class="card-btn">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <script>
+   document.querySelectorAll('input[type="number"]').forEach(input => {
+    input.addEventListener('input', function () {
+        let row = input.closest('tr');
+        let unitPrice = parseFloat(row.querySelector('td:nth-child(3)').innerText.replace('₹', '').trim());
+        let quantity = parseInt(input.value);
+        let totalCell = row.querySelector('td:nth-child(5)');
+        if (!isNaN(unitPrice) && !isNaN(quantity)) {
+            totalCell.innerText = '₹ ' + (unitPrice * quantity).toFixed(2);
+        }
+
+        // Update Grand Total
+        let grandTotal = 0;
+        document.querySelectorAll('tbody tr').forEach(r => {
+            let p = parseFloat(r.querySelector('td:nth-child(3)').innerText.replace('₹', '').trim());
+            let q = parseInt(r.querySelector('input[type="number"]').value);
+            if (!isNaN(p) && !isNaN(q)) {
+                grandTotal += p * q;
+            }
+        });
+        document.querySelector('h3').innerText = 'Grand Total: ₹ ' + grandTotal.toFixed(2);
+    });
+});
+</script>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,246 @@
+
+{% load static %}
+{% block content %}
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    .navbar {
+        background-color: #333;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+    }
+
+    .navbar h1 {
+        margin: 0;
+        font-size: 1.8rem;
+    }
+
+    .nav-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .nav-actions form,
+    .nav-actions a,
+    .nav-actions button {
+        margin: 0;
+    }
+
+    .btn-logout,
+    .cart-button,
+    .login-btn,
+    .signup-btn {
+        background-color: #e74c3c;
+        color: white;
+        padding: 8px 14px;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .cart-button {
+        background-color: #17a2b8;
+    }
+
+    .login-btn {
+        background-color: #6c757d;
+    }
+
+    .signup-btn {
+        background-color: #5a6268;
+    }
+
+    .btn-logout:hover {
+        background-color: #c0392b;
+       
+    }
+
+    .cart-button:hover {
+        background-color: #138496;
+    }
+
+    .login-btn:hover {
+        background-color: #5a6268;
+    }
+
+    .signup-btn:hover {
+        background-color: #495057;
+    }
+    /* Buttons */
+.btn {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: rgb(1, 0, 0);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+  /* General Wishlist Page Styling */
+  body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #f1f4f9, #dff1ff);
+      margin: 0;
+      padding: 0;
+  }
+
+  h2 {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 2rem;
+      color: #333;
+  }
+
+  .wishlist-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: auto;
+  }
+
+  .wishlist-item-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+      padding: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .wishlist-item-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+  }
+
+  .wishlist-item-card img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 10px;
+  }
+
+  .wishlist-item-card h3 {
+      margin: 10px 0 5px;
+      font-size: 1.2rem;
+      color: #333;
+  }
+
+  .wishlist-item-card p {
+      color: #555;
+      font-size: 0.95rem;
+      margin: 5px 0;
+  }
+
+  .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      gap: 10px;
+  }
+
+  /* Remove Button */
+  .remove-btn {
+      background-color: #e74c3c;
+      color: white;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+  }
+
+  .remove-btn:hover {
+      background-color: #c0392b;
+  }
+
+  /* Add to Cart Button */
+  .add-to-cart-btn {
+      background-color: #0ab0bb;
+      color: white;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+  }
+
+  .add-to-cart-btn:hover {
+      background-color: #64a9f3;
+  }
+  .cart-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background-color: #ffffff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.cart-button:hover {
+    background-color: #218838;
+}
+
+.cart-icon {
+    width: 20px;
+    height: 20px;
+}
+</style>
+<div class="navbar">
+    <div style="text-align: center; margin-top: 1;">
+        
+      <a href="{% url 'product_list' %}"><img src="{% static 'logo3.jpeg' %}" alt="Site Logo" style="height: 70px; border-radius: 50%">
+      </a>
+      
+    </div>
+    <center><h1>Your Wishlist</h1> </center>
+    <a href="{% url 'product_list' %}" class="cart-button">
+        <img src="{% static 'home.png' %}" alt="Cart" class="cart-icon">
+    </a>
+  </div>
+
+{% if wishlist_items %}
+    <div class="wishlist-items">
+        {% for item in wishlist_items %}
+            <div class="wishlist-item-card">
+                <h3>{{ item.product.name }}</h3>
+                <p>Price: ₹{{ item.product.price }}</p>
+                {% if item.product.image %}
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" width="150">
+                {% endif %}
+                <p>{{ item.product.description|truncatewords:15 }}</p>
+
+                <form method="post" action="{% url 'remove_from_wishlist' item.product.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Remove</button>
+                </form>
+
+                <form method="post" action="{% url 'add_to_cart' item.product.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>Your wishlist is empty.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capital Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<style>
+  body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.top-nav, .main-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #f8f8f8;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.main-nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 20px;
+  background: #fdfdfd;
+}
+
+.hero-text {
+  max-width: 50%;
+}
+
+.hero-text h1 {
+  font-size: 40px;
+}
+
+.hero-text button {
+  padding: 10px 20px;
+  background: black;
+  color: white;
+  border: none;
+}
+
+.categories {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.category img {
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.category h3 {
+  text-align: center;
+}
+
+.hero-slider {
+  position: relative;
+  width: 50%;
+}
+
+.slide {
+  width: 100%;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.slide.active {
+  display: block;
+  transition: opacity 1s ease-in-out;
+}
+
+</style>
+<body>
+  <!-- Top Navigation -->
+  <div class="top-nav">
+    <div class="left-links">
+      <a href="#">About Us</a>
+      <a href="#">Privacy</a>
+      <a href="#">FAQ</a>
+      <a href="#">Careers</a>
+    </div>
+    <div class="right-links">
+      <a href="#">My Wishlist</a>
+      <a href="#">Track Your Order</a>
+    </div>
+  </div>
+
+  <!-- Main Nav -->
+  <header class="main-header">
+    <div class="logo">Capital <span>Shop</span></div>
+    <nav class="main-nav">
+      <a href="#">Home</a>
+      <a href="#">Men</a>
+      <a href="#">Women</a>
+      <a href="#">Baby Collection</a>
+      <a href="#">Blog</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="icons">
+      <i class="icon">🔍</i>
+      <i class="icon">👤</i>
+      <i class="icon">🛒</i>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <section class="hero">
+    <div class="hero-text">
+      <p>Fashion Sale</p>
+      <h1>Minimal Menz Style</h1>
+      <p>Consequat adipiscing elit. Laborum fuga incididunt...</p>
+      <button>Shop Now</button>
+    </div>
+    <div class="hero-image">
+      <img src="banner.jpg" alt="Fashion Model">
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories">
+    <div class="category">
+      <img src="mens.jpg" alt="Men Fashion">
+      <h3>Men's Fashion</h3>
+    </div>
+    <div class="category">
+      <img src="womens.jpg" alt="Women Fashion">
+      <h3>Women's Fashion</h3>
+    </div>
+    <div class="category">
+      <img src="baby.jpg" alt="Baby Fashion">
+      <h3>Baby Fashion</h3>
+    </div>
+  </section>
+  <script>
+    
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+
+  function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
+  }
+
+  setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }, 3000);
+  let cartCount = 0;
+  function addToCart() {
+    cartCount++;
+    document.getElementById('cart-count').innerText = cartCount;
+  }
+
+</script>
+
+ 
+
+  <!-- Trending section would go here -->
+
+</body>
+</html>

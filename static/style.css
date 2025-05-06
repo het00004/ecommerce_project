@@ -1,0 +1,100 @@
+
+
+/* Cart Page Styling */
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2em;
+    color: #333;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+thead {
+    background-color: #f4f4f4;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+td {
+    color: #444;
+}
+
+h3 {
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+}
+
+.btn {
+    display: inline-block;
+    background: #28a745;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #218838;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    border: none;
+    background: none;
+}
+.payment-options {
+    margin: 20px 0;
+}
+
+.payment-options label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+.payment-detail {
+    margin: 10px 0;
+    display: none;
+}
+
+.payment-detail input,
+.payment-detail select {
+    padding: 10px;
+    width: 100%;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+button.btn {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button.btn:hover {
+    background-color: #218838;
+}
