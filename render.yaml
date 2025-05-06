@@ -1,0 +1,22 @@
+databases:
+  - name: db
+    plan: free
+    databaseName: db
+    user: ecommerce_user
+
+services:
+  - type: web
+    plan: free
+    name: ecommerce_service
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn ecommerce_project.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ecommerce_db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: false
