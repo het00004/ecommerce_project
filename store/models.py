@@ -132,7 +132,7 @@ class Coupon(models.Model):
 
     def __str__(self):
         return self.code
-    
+    # add slide show
 class Slide(models.Model):
     title = models.CharField(max_length=100)
     subtitle = models.CharField(max_length=200, blank=True)
